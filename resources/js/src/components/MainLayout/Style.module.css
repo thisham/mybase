@@ -1,0 +1,20 @@
+.base {
+  @apply bg-slate-100 min-h-screen w-full flex;
+}
+
+.main {
+  @apply py-8 px-4 flex flex-col gap-4;
+}
+
+.navigator {
+  @apply flex gap-2;
+}
+
+.back_button {
+  @apply p-2 rounded-lg transition-all duration-300;
+  @apply bg-transparent hover:bg-slate-200 active:bg-slate-300;
+}
+
+.page_title {
+  @apply text-lg font-semibold;
+}

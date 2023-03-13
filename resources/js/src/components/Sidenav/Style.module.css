@@ -1,0 +1,46 @@
+.base {
+  @apply border-r flex flex-col gap-4 min-h-full w-64;
+  @apply border-r-slate-200 bg-white;
+}
+
+.profile_container {
+  @apply mt-4 p-4 flex flex-col items-center gap-4;
+}
+
+.profile_picture_container {
+  @apply rounded-full overflow-hidden w-36 h-36;
+}
+
+.profile_picture {
+  @apply w-full h-full object-top object-cover;
+}
+
+.profile_user_data {
+  @apply flex flex-col items-center;
+}
+
+.profile_fullname {
+  @apply text-lg font-bold;
+}
+
+.profile_email {
+  @apply text-sm text-slate-700;
+}
+
+.menu_container {
+  @apply flex flex-col gap-2;
+}
+
+.menu_item {
+  @apply py-2 px-4 text-sm mx-4 rounded-lg flex gap-2 items-center;
+}
+
+.menu_item_inactive {
+  @apply menu_item transition-all duration-300;
+  @apply bg-transparent hover:bg-slate-200 active:bg-slate-300;
+}
+
+.menu_item_active {
+  @apply menu_item;
+  @apply bg-slate-200;
+}

@@ -1,13 +1,23 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "@resources/css/app.css";
+import Home from "./app/Home";
 
 export default function App() {
-  return <h1>How To Install React in Laravel 9 with Vite</h1>;
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+    </Routes>
+  );
 }
 
 const root = document.getElementById("root");
 
 if (root) {
-  createRoot(root).render(<App />);
+  createRoot(root).render(
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  );
 }
