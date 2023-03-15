@@ -26,7 +26,8 @@ function TargetCard(props: TargetCardProps): JSX.Element {
         <div className={style.target__progress_container}>
           <div className={style.target__progress_text_container}>
             <span className={style.target__progress_text}>
-              {props.current} cress of {props.target} cress
+              {props.current.toLocaleString()} cress of{" "}
+              {props.target.toLocaleString()} cress
             </span>
             <span className={style.target__progress_text}>
               {progressPercentage} %
