@@ -1,6 +1,11 @@
+.standard-text-color {
+  @apply text-slate-900 dark:text-white;
+}
+
 .base {
   @apply border-r flex flex-col gap-4 min-h-full w-64;
   @apply border-r-slate-200 bg-white;
+  @apply dark:border-r-slate-700 dark:bg-slate-800;
 }
 
 .profile_container {
@@ -20,11 +25,12 @@
 }
 
 .profile_fullname {
+  @apply standard-text-color;
   @apply text-lg font-bold;
 }
 
 .profile_email {
-  @apply text-sm text-slate-700;
+  @apply text-sm text-slate-700 dark:text-slate-400;
 }
 
 .menu_container {
@@ -33,14 +39,16 @@
 
 .menu_item {
   @apply py-2 px-4 text-sm mx-4 rounded-lg flex gap-2 items-center;
+  @apply standard-text-color;
 }
 
 .menu_item_inactive {
   @apply menu_item transition-all duration-300;
   @apply bg-transparent hover:bg-slate-200 active:bg-slate-300;
+  @apply dark:hover:bg-slate-700 dark:active:bg-slate-900;
 }
 
 .menu_item_active {
   @apply menu_item;
-  @apply bg-slate-200;
+  @apply bg-slate-200 dark:bg-slate-700;
 }
