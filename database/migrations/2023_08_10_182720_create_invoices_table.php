@@ -23,7 +23,7 @@ return new class extends Migration
             $table->timestamp('paid_at')->nullable();
             $table->timestamps();
 
-            $table->foreignId('user_id')->references('id')
+            $table->foreign('user_id')->references('id')
                 ->on('users')->onDelete('cascade')
                 ->onUpdate('cascade');
         });

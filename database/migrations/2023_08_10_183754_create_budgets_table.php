@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('budgets', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->uuid('user_id');
             $table->uuid('invoice_id')->nullable();
             $table->string('name');
             $table->float('value');
@@ -25,10 +26,10 @@ return new class extends Migration
             $table->timestamp('finalized_at')->nullable();
             $table->timestamps();
 
-            $table->foreignId('user_id')->references('id')
+            $table->foreign('user_id')->references('id')
                 ->on('users')->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->foreignId('invoice_id')->references('id')
+            $table->foreign('invoice_id')->references('id')
                 ->on('invoices')->onDelete('restrict')
                 ->onUpdate('restrict');
         });
