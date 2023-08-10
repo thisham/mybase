@@ -1,0 +1,12 @@
+@layer components {
+    .field-group {
+        @apply flex flex-col gap-2;
+        @apply mb-2 w-full;
+    }
+
+    .field-group input {
+        @apply flex items-center;
+        @apply h-10 px-4 border;
+        @apply border-item-200 dark:border-item-700;
+    }
+}

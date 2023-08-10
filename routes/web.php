@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\SignInController;
+use App\Http\Controllers\SignUpController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,4 +15,21 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::view('/{path?}', 'reactapp')->where('path', '.*');
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/sign-in', [SignInController::class, 'render'])
+    ->name('auth.sign-in');
+Route::post('sign-in', [SignInController::class, 'handle'])
+    ->name('auth.sign-in');
+
+Route::get('/sign-up', [SignUpController::class, 'render'])
+    ->name('auth.sign-up');
+Route::post('sign-up', [SignUpController::class, 'handle'])
+    ->name('auth.sign-up');
+
+Route::get('/', function () {
+    return view('welcome');
+})->name('main.dashboard');

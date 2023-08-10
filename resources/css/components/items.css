@@ -1,0 +1,19 @@
+@layer components {
+    .card {
+        @apply px-8 py-8 w-full;
+        @apply bg-ground-50 dark:bg-ground-800;
+    }
+}
+
+@layer components {
+    .clickable {
+        @apply basic-transition;
+        @apply py-2 px-4 w-full;
+    }
+
+    .clickable.primary {
+        @apply text-item-50;
+        @apply bg-brand-500 hover:bg-brand-400 active:bg-brand-600;
+        @apply dark:bg-brand-600 dark:hover:bg-brand-500 dark:active:bg-brand-700;
+    }
+}

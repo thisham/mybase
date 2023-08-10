@@ -1,3 +1,41 @@
+@import "components/index.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    ::-webkit-calendar-picker-indicator,
+    ::-webkit-time-picker-indicator {
+        @apply invert-0 dark:invert;
+    }
+
+    body {
+        font-family: "K2D", sans-serif;
+        @apply min-h-screen min-w-full flex flex-col;
+        @apply bg-ground-200 text-ground-900;
+        @apply dark:bg-gradient-to-bl dark:from-ground-900
+            dark:to-ground-900 dark:text-ground-50;
+    }
+
+    h1 {
+        @apply text-2xl font-semibold mb-4 mt-2;
+    }
+
+    p {
+        @apply text-sm text-ground-700;
+        @apply dark:text-ground-400;
+    }
+
+    .basic-transition {
+        @apply transition-all duration-300;
+    }
+
+    .dynamic-pad {
+        @apply flex w-full flex-1;
+    }
+
+    .content-base {
+        @apply flex flex-col flex-1 print:hidden;
+    }
+}
