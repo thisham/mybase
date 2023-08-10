@@ -1,0 +1,25 @@
+@layer components {
+    .topnav {
+        @apply flex items-center gap-4;
+        @apply fixed z-10 shadow-md h-12 w-full px-12;
+        @apply bg-ground-50 dark:bg-ground-900;
+    }
+
+    .topnav .button-container {
+        @apply flex items-center h-full;
+    }
+
+    .topnav .clickable {
+        @apply basic-transition;
+        @apply flex items-center;
+        @apply h-full px-4 whitespace-nowrap;
+        @apply bg-transparent hover:bg-brand-300 active:bg-brand-500;
+        @apply dark:hover:bg-brand-700 dark:active:bg-brand-500;
+        @apply active:text-item-50;
+    }
+
+    .topnav .clickable.active {
+        @apply pointer-events-none cursor-default;
+        @apply bg-brand-500 text-item-50;
+    }
+}
