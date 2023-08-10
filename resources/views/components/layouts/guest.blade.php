@@ -16,10 +16,10 @@
 <body class="min-h-screen flex flex-col">
     <div class="topnav">
         <div class="button-container">
-            <a class="clickable @if (Route::is('auth.sign-up')) : active @endif"
-                href="{{ route('auth.sign-up') }}">Sign Up</a>
-            <a class="clickable @if (Route::is('auth.sign-in')) : active @endif"
-                href="{{ route('auth.sign-in') }}">Sign In</a>
+            <a class="clickable @if (Route::is('auth.sign-up')) active @endif" href="{{ route('auth.sign-up') }}">Sign
+                Up</a>
+            <a class="clickable @if (Route::is('auth.sign-in')) active @endif" href="{{ route('auth.sign-in') }}">Sign
+                In</a>
         </div>
     </div>
 
@@ -27,7 +27,9 @@
         {{ $slot }}
     </div>
 
-    <footer>test</footer>
+    <footer class="w-full h-12 flex items-center justify-center">
+        &copy; 2023 Divisi Anggaran Keuangan
+    </footer>
 </body>
 
 </html>
