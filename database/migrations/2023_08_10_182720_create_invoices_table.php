@@ -20,6 +20,8 @@ return new class extends Migration
             $table->float('income_reduction');
             $table->float('billing');
             $table->float('total');
+            $table->float('paid');
+            $table->float('rest');
             $table->timestamp('paid_at')->nullable();
             $table->timestamps();
 
