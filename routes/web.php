@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SignInController;
 use App\Http\Controllers\SignUpController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,6 +32,12 @@ Route::get('/sign-up', [SignUpController::class, 'render'])
 Route::post('sign-up', [SignUpController::class, 'handle'])
     ->name('auth.sign-up');
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('main.dashboard');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'render'])
+        ->name('main.dashboard');
+
+    Route::get('/sign-out', function () {
+        Auth::logout();
+        return redirect()->route('auth.sign-in');
+    })->name('auth.sign-out');
+});
