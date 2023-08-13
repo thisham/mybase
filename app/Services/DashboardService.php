@@ -37,7 +37,7 @@ class DashboardService extends Service
         try {
             $rates = (float) DB::table('regulations')->select('rates')
                 ->where('id', 'LOAN_FEE')->first()->rates;
-            $balance = (float) DB::table('loans')->selectRaw(DB::raw('sum(billings) as balance'))
+            $balance = (float) DB::table('loans')->selectRaw(DB::raw('sum(value) as balance'))
                 ->where('user_id', $userID)
                 ->whereNull('finalized_at')
                 ->first()->balance;
@@ -53,12 +53,23 @@ class DashboardService extends Service
         try {
             $rates = (float) DB::table('regulations')->select('rates')
                 ->where('id', 'INCOME_REDUCTION')->first()->rates;
-            $balance = (float) DB::table('loans')->selectRaw(DB::raw('sum(billings) as balance'))
+            $incomeReductions = 0;
+            $incomes = DB::table('incomes')->select('value')
                 ->where('user_id', $userID)
                 ->whereNull('finalized_at')
-                ->first()->balance;
-            $incomeReductions = ceil(($balance + ($balance * $rates / 100)) / 10) * 10;
-            return $this->getCurrentBillings($userID) + $incomeReductions;
+                ->get()->map(function ($data) use ($rates) {
+                    return (object) [
+                        'value' => ceil(($data->value * $rates / 100) / 10) * 10
+                    ];
+                });
+
+            foreach ($incomes as $record) {
+                $incomeReductions += $record->value;
+            }
+
+            return $this->getCurrentBillings($userID)
+                + $this->getCurrentLoans($userID)
+                + $incomeReductions;
         } catch (\Throwable $th) {
             $this->writeLog('DashboardService::getPredictedBillings', $th);
             return 0;
