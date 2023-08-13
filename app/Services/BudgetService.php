@@ -5,6 +5,7 @@ namespace App\Services;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Ramsey\Uuid\Uuid;
 
 class BudgetService extends Service
 {
@@ -36,6 +37,28 @@ class BudgetService extends Service
         } catch (\Throwable $th) {
             $this->writeLog('BudgetService::getBudgetList', $th);
             return [];
+        }
+    }
+
+    public function store(object $data): bool
+    {
+        try {
+            $subtotal = $data->value + ($data->tax ?? 0) + ($data->admin ?? 0);
+            $billing = ceil($subtotal / 10) * 10;
+
+            return DB::table('budgets')->insert([
+                'id' => Uuid::uuid4(),
+                'user_id' => Auth::user()->id,
+                'name' => $data->name,
+                'value' => $data->value,
+                'tax' => $data->tax,
+                'admin' => $data->admin,
+                'subtotal' => $subtotal,
+                'billing' => $billing
+            ]);
+        } catch (\Throwable $th) {
+            $this->writeLog('BudgetService::store', $th);
+            return false;
         }
     }
 }

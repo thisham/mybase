@@ -1,13 +1,13 @@
-@extends('components.layouts.user', ['title' => __('display.financial.income')])
+@extends('components.layouts.user', ['title' => __('display.financial.budgets')])
 
 @section('content')
     <x-layouts.user-transaction>
         <div class="flex flex-col gap-2 mb-4">
             <div class="flex justify-between items-center">
-                <h1>{{ __('display.financial.income') }}</h1>
-                {{-- <a href="{{ route('financial.create-income') }}" class="clickable primary h-fit w-fit text-sm">
+                <h1>{{ __('display.financial.budgets') }}</h1>
+                <a href="{{ route('financial.create-budget') }}" class="clickable primary h-fit w-fit text-sm">
                     {{ __('display.action.add') }}
-                </a> --}}
+                </a>
             </div>
 
             @if (Session::has('success'))
