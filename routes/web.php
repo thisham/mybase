@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\CreateIncomeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IncomeController;
+use App\Http\Controllers\IncomeCreatorController;
+use App\Http\Controllers\IncomeUpdaterController;
 use App\Http\Controllers\SignInController;
 use App\Http\Controllers\SignUpController;
-use App\Http\Controllers\UpdateIncomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -44,14 +44,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/financial/incomes/{id}/delete', [IncomeController::class, 'destroy'])
         ->name('financial.delete-income');
 
-    Route::get('/financial/incomes/create', [CreateIncomeController::class, 'render'])
+    Route::get('/financial/incomes/create', [IncomeCreatorController::class, 'render'])
         ->name('financial.create-income');
-    Route::post('/financial/incomes/create', [CreateIncomeController::class, 'handle'])
+    Route::post('/financial/incomes/create', [IncomeCreatorController::class, 'handle'])
         ->name('financial.create-income');
 
-    Route::get('/financial/incomes/{id}/update', [UpdateIncomeController::class, 'render'])
+    Route::get('/financial/incomes/{id}/update', [IncomeUpdaterController::class, 'render'])
         ->name('financial.update-income');
-    Route::post('/financial/incomes/{id}/update', [UpdateIncomeController::class, 'handle'])
+    Route::post('/financial/incomes/{id}/update', [IncomeUpdaterController::class, 'handle'])
         ->name('financial.update-income');
 
     Route::get('/sign-out', function () {

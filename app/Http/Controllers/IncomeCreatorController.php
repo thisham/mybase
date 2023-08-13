@@ -6,7 +6,7 @@ use App\Http\Requests\IncomeRequest;
 use App\Services\IncomeService;
 use Illuminate\Http\Request;
 
-class UpdateIncomeController extends Controller
+class IncomeCreatorController extends Controller
 {
     private $service;
 
@@ -15,25 +15,24 @@ class UpdateIncomeController extends Controller
         $this->service = $service;
     }
 
-    public function render(string $id)
+    public function render()
     {
         return view('pages.income-form', [
-            'title' => __('display.financial.update-income'),
-            'action' => route('financial.update-income', ['id' => $id]),
-            'record' => $this->service->getIncomeByID($id),
+            'title' => __('display.financial.create-income'),
+            'action' => route('financial.create-income'),
             'regulation' => $this->service->getRegulation(),
         ]);
     }
 
-    public function handle(IncomeRequest $request, string $id)
+    public function handle(IncomeRequest $request)
     {
-        if ($this->service->updateIncome($request, $id))
+        if ($this->service->storeIncome($request))
             return redirect()->route('financial.incomes')
-                ->with('success', __('display.message.update-success'));
+                ->with('success', __('display.message.create-success'));
 
         return redirect()->back()->with(
             'error',
-            __('display.message.update-failed')
+            __('display.message.create-failed')
         );
     }
 }
