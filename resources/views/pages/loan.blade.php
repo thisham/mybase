@@ -43,9 +43,9 @@
                             </td>
                             <td>
                                 <div class="flex">
-                                    {{-- <a href="{{ route('financial.update-loan', ['id' => $record->id]) }}"
+                                    <a href="{{ route('financial.update-loan', ['id' => $record->id]) }}"
                                         class="clickable ghost w-fit">{{ __('display.action.edit') }}</a>
-                                    <a href="{{ route('financial.delete-loan', ['id' => $record->id]) }}"
+                                    {{-- <a href="{{ route('financial.delete-loan', ['id' => $record->id]) }}"
                                         class="clickable ghost w-fit">{{ __('display.action.remove') }}</a> --}}
                                 </div>
                             </td>

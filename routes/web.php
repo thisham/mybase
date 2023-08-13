@@ -9,6 +9,7 @@ use App\Http\Controllers\IncomeCreatorController;
 use App\Http\Controllers\IncomeUpdaterController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\LoanCreatorController;
+use App\Http\Controllers\LoanUpdaterController;
 use App\Http\Controllers\SignInController;
 use App\Http\Controllers\SignUpController;
 use Illuminate\Support\Facades\Auth;
@@ -83,6 +84,11 @@ Route::middleware(['auth'])->group(function () {
         ->name('financial.create-loan');
     Route::post('/financial/loans/create', [LoanCreatorController::class, 'handle'])
         ->name('financial.create-loan');
+
+    Route::get('/financial/loans/{id}/update', [LoanUpdaterController::class, 'render'])
+        ->name('financial.update-loan');
+    Route::post('/financial/loans/{id}/update', [LoanUpdaterController::class, 'handle'])
+        ->name('financial.update-loan');
 
     Route::get('/sign-out', function () {
         Auth::logout();

@@ -44,8 +44,8 @@
                     </div>
 
                     <div class="field-group flex-1">
-                        <label for="reduction">{{ __('display.field-column.reduction') }}</label>
-                        <input type="number" name="reduction" id="reduction" x-model="reduction" disabled />
+                        <label for="billing">{{ __('display.field-column.billing') }}</label>
+                        <input type="number" name="billing" id="billing" x-model="billing" disabled />
                     </div>
                 </div>
 
@@ -64,18 +64,18 @@
         const state = {
             rates: {{ $regulation }},
             value: {{ old('value') ?? ($record->value ?? 0) }},
-            reduction: {{ $record->reduction ?? 0 }},
+            billing: {{ $record->billing ?? 0 }},
 
             init() {
                 if (this.value > 0) {
                     this.handleValueChange();
                 }
             },
-            countReduction(value) {
-                return Math.ceil((Number(this.rates) / 100 * this.value) / 10) * 10;
+            countBilling(value) {
+                return Math.ceil((Number(this.rates) / 100 * this.value) / 10) * 10 + Number(this.value);
             },
             handleValueChange() {
-                this.reduction = this.countReduction(this.value);
+                this.billing = this.countBilling(this.value);
             }
         }
     </script>

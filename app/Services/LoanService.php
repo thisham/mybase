@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Error;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -59,6 +60,59 @@ class LoanService extends Service
             ]);
         } catch (\Throwable $th) {
             $this->writeLog('LoanService::storeLoan', $th);
+            return false;
+        }
+    }
+
+    public function getLoanByID(string $id): object | null
+    {
+        try {
+            $regulation = $this->getRegulation();
+            $record = DB::table('loans')->where('id', $id)
+                ->first([
+                    'id', 'account', 'value', 'billing',
+                    'rates', 'finalized_at', 'updated_at',
+                    'created_at'
+                ]);
+
+            return (object) [
+                'id' => $record->id,
+                'account' => $record->account,
+                'value' => $record->value,
+                'reduction' => $regulation,
+                'rates' => $record->rates ?? $regulation,
+                'finalized_at' => $record->finalized_at,
+                'updated_at' => $record->updated_at,
+                'created_at' => $record->created_at
+            ];
+        } catch (\Throwable $th) {
+            $this->writeLog('LoanService::getLoanByID', $th);
+            return null;
+        }
+    }
+
+    private function hasFinalized(string $id): bool
+    {
+        return DB::table('loans')
+            ->where('id', $id)
+            ->whereNotNull('finalized_at')
+            ->exists();
+    }
+
+    public function updateLoan(object $data, string $id): bool
+    {
+        try {
+            if ($this->hasFinalized($id))
+                throw new Error('report.finalized');
+
+            return DB::table('loans')
+                ->where('id', $id)
+                ->update([
+                    'account' => $data->account,
+                    'value' => $data->value
+                ]);
+        } catch (\Throwable $th) {
+            $this->writeLog('LoanService::updateLoan', $th);
             return false;
         }
     }
