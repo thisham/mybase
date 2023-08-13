@@ -1,7 +1,7 @@
 <div class="grid grid-cols-6 gap-4">
     <div class="w-full flex flex-col">
         <a href="{{ route('financial.incomes') }}"
-            class="clickable ghost @if (Route::is('financial.incomes')) active @endif">
+            class="clickable ghost @if (Route::is('financial.incomes') || Route::is('financial.create-income') || Route::is('financial.update-income')) active @endif">
             {{ __('display.financial.income') }}
         </a>
         <a href="#" class="clickable ghost @if (Route::is('main.dashboard')) active @endif">

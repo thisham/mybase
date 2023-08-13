@@ -18,8 +18,9 @@ class CreateIncomeController extends Controller
     public function render()
     {
         return view('pages.income-form', [
-            'feature' => 'create',
-            'regulation' => $this->service->getRegulation()
+            'title' => __('display.financial.create-income'),
+            'action' => route('financial.create-income'),
+            'regulation' => $this->service->getRegulation(),
         ]);
     }
 

@@ -1,11 +1,8 @@
-<x-layouts.user
-    title="{{ __($feature === 'create' ? 'display.financial.create-income' : 'display.financial.update-income') }}">
+<x-layouts.user title="{{ $title }}">
     <x-layouts.user-transaction>
         <div class="flex flex-col gap-2 mb-4">
             <div class="flex justify-between items-center">
-                <h1>
-                    {{ __($feature === 'create' ? 'display.financial.create-income' : 'display.financial.update-income') }}
-                </h1>
+                <h1>{{ $title }}</h1>
             </div>
 
             @if (Session::has('error'))
@@ -19,7 +16,8 @@
 
                 <div class="field-group">
                     <label for="source">{{ __('display.field-column.source') }}</label>
-                    <input type="text" name="source" id="source" />
+                    <input type="text" name="source" id="source"
+                        value="{{ old('source') ?? ($record->source ?? '') }}" />
                     @error('source')
                         <small class="text-danger-500 text-sm">{{ $message }}</small>
                     @enderror
@@ -61,12 +59,20 @@
 
     <script type="text/javascript" defer>
         const state = {
-            reduction: 0,
-            rates: "{{ $regulation }}",
-            value: 0,
+            rates: {{ $regulation }},
+            value: {{ old('value') ?? ($record->value ?? 0) }},
+            reduction: {{ $record->reduction ?? 0 }},
 
+            init() {
+                if (this.value > 0) {
+                    this.handleValueChange();
+                }
+            },
+            countReduction(value) {
+                return Math.ceil((Number(this.rates) / 100 * this.value) / 10) * 10;
+            },
             handleValueChange() {
-                this.reduction = Math.ceil((Number(this.rates) / 100 * this.value) / 10) * 10;
+                this.reduction = this.countReduction(this.value);
             }
         }
     </script>

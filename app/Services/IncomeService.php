@@ -62,4 +62,31 @@ class IncomeService extends Service
             return false;
         }
     }
+
+    public function getIncomeByID(string $id): object | null
+    {
+        try {
+            $regulation = $this->getRegulation();
+            $record = DB::table('incomes')->where('id', $id)
+                ->first([
+                    'id', 'source', 'value', 'reduction',
+                    'rates', 'finalized_at', 'updated_at',
+                    'created_at'
+                ]);
+
+            return (object) [
+                'id' => $record->id,
+                'source' => $record->source,
+                'value' => $record->value,
+                'reduction' => $regulation,
+                'rates' => $record->rates ?? $regulation,
+                'finalized_at' => $record->finalized_at,
+                'updated_at' => $record->updated_at,
+                'created_at' => $record->created_at
+            ];
+        } catch (\Throwable $th) {
+            $this->writeLog('IncomeService::getIncomeByID', $th);
+            return null;
+        }
+    }
 }
