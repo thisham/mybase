@@ -127,4 +127,18 @@ class BudgetService extends Service
             return false;
         }
     }
+
+    public function deleteByID(string $id)
+    {
+        try {
+            if ($this->hasFinalized($id))
+                throw new Error('report.finalized');
+
+            return DB::table('budgets')->where('id', $id)
+                ->delete();
+        } catch (\Throwable $th) {
+            $this->writeLog('BudgetService::deleteByID', $th);
+            return false;
+        }
+    }
 }

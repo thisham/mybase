@@ -60,6 +60,8 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('/financial/budgets')->group(function () {
         Route::get('/', [BudgetController::class, 'render'])
             ->name('financial.budgets');
+        Route::get('/{id}/delete', [BudgetController::class, 'destroy'])
+            ->name('financial.delete-budget');
 
         Route::get('/create', [BudgetCreatorController::class, 'render'])
             ->name('financial.create-budget');
