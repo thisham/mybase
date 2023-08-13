@@ -41,6 +41,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/financial/incomes', [IncomeController::class, 'render'])
         ->name('financial.incomes');
 
+    Route::get('/financial/incomes/create', [CreateIncomeController::class, 'render'])
+        ->name('financial.create-income');
+    Route::post('/financial/incomes/create', [CreateIncomeController::class, 'handle'])
+        ->name('financial.create-income');
+
     Route::get('/sign-out', function () {
         Auth::logout();
         return redirect()->route('auth.sign-in');

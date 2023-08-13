@@ -47,4 +47,19 @@ class IncomeService extends Service
             return [];
         }
     }
+
+    public function storeIncome(object $data): bool
+    {
+        try {
+            return DB::table('incomes')->insert([
+                'id' => Uuid::uuid4(),
+                'user_id' => Auth::user()->id,
+                'source' => $data->source,
+                'value' => $data->value
+            ]);
+        } catch (\Throwable $th) {
+            $this->writeLog('IncomeService::storeIncome', $th);
+            return false;
+        }
+    }
 }
