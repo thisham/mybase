@@ -4,7 +4,7 @@
             class="clickable ghost @if (Route::is('financial.incomes') || Route::is('financial.create-income') || Route::is('financial.update-income')) active @endif">
             {{ __('display.financial.income') }}
         </a>
-        <a href="#" class="clickable ghost @if (Route::is('main.dashboard')) active @endif">
+        <a href="{{ route('financial.loans') }}" class="clickable ghost @if (Route::is('financial.loans') || Route::is('financial.create-loan') || Route::is('financial.update-loan')) active @endif">
             {{ __('display.financial.loans') }}
         </a>
         <a href="{{ route('financial.budgets') }}"

@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\IncomeCreatorController;
 use App\Http\Controllers\IncomeUpdaterController;
+use App\Http\Controllers\LoanController;
 use App\Http\Controllers\SignInController;
 use App\Http\Controllers\SignUpController;
 use Illuminate\Support\Facades\Auth;
@@ -73,6 +74,9 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/{id}/update', [BudgetUpdaterController::class, 'handle'])
             ->name('financial.update-budget');
     });
+
+    Route::get('/financial/loans', [LoanController::class, 'render'])
+        ->name('financial.loans');
 
     Route::get('/sign-out', function () {
         Auth::logout();
