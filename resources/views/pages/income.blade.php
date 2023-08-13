@@ -17,7 +17,7 @@
             <table class="table-fixed w-full">
                 <thead>
                     <tr class="border-b-2 border-item-400">
-                        <th class="py-4 text-left pl-2">No.</th>
+                        <th class="py-4 text-left pl-2 w-16">No.</th>
                         <th class="py-4 text-left pl-2">{{ __('display.field-column.source') }}</th>
                         <th class="py-4 text-left pl-2">{{ __('display.field-column.value') }}</th>
                         <th class="py-4 text-left pl-2">{{ __('display.field-column.reduction') }}</th>
