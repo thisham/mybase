@@ -79,6 +79,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/financial/loans', [LoanController::class, 'render'])
         ->name('financial.loans');
+    Route::get('/financial/loans/{id}/delete', [LoanController::class, 'destroy'])
+        ->name('financial.delete-loan');
 
     Route::get('/financial/loans/create', [LoanCreatorController::class, 'render'])
         ->name('financial.create-loan');

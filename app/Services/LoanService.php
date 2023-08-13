@@ -116,4 +116,18 @@ class LoanService extends Service
             return false;
         }
     }
+
+    public function deleteByID(string $id): bool
+    {
+        try {
+            if ($this->hasFinalized($id))
+                throw new Error('report.finalized');
+
+            return DB::table('loans')->where('id', $id)
+                ->delete();
+        } catch (\Throwable $th) {
+            $this->writeLog('LoanService::deleteByID', $th);
+            return false;
+        }
+    }
 }

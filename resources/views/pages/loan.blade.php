@@ -45,8 +45,8 @@
                                 <div class="flex">
                                     <a href="{{ route('financial.update-loan', ['id' => $record->id]) }}"
                                         class="clickable ghost w-fit">{{ __('display.action.edit') }}</a>
-                                    {{-- <a href="{{ route('financial.delete-loan', ['id' => $record->id]) }}"
-                                        class="clickable ghost w-fit">{{ __('display.action.remove') }}</a> --}}
+                                    <a href="{{ route('financial.delete-loan', ['id' => $record->id]) }}"
+                                        class="clickable ghost w-fit">{{ __('display.action.remove') }}</a>
                                 </div>
                             </td>
                         </tr>
