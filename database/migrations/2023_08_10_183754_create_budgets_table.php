@@ -19,10 +19,10 @@ return new class extends Migration
             $table->uuid('invoice_id')->nullable();
             $table->string('name');
             $table->float('value');
-            $table->float('tax')->nullable();
-            $table->float('admin')->nullable();
-            $table->float('subtotal')->nullable();
-            $table->float('billing')->nullable();
+            $table->float('tax')->nullable()->default(0);
+            $table->float('admin')->nullable()->default(0);
+            $table->float('subtotal')->nullable()->default(0);
+            $table->float('billing')->nullable()->default(0);
             $table->timestamp('finalized_at')->nullable();
             $table->timestamps();
 
