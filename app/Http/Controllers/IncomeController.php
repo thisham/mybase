@@ -20,4 +20,14 @@ class IncomeController extends Controller
             'incomeList' => $this->service->getIncomeList()
         ]);
     }
+
+    public function destroy(string $id)
+    {
+        if ($this->service->deleteByID($id))
+            return redirect()->back()
+                ->with('success', __('display.message.delete-success'));
+
+        return redirect()->back()
+            ->with('error', __('display.message.delete-failed'));
+    }
 }

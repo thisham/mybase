@@ -66,28 +66,6 @@ class IncomeService extends Service
         }
     }
 
-    public function updateIncome(object $data, string $id): bool
-    {
-        try {
-            if (DB::table('incomes')
-                ->where('id', $id)
-                ->whereNotNull('finalized_at')
-                ->exists()
-            )
-                throw new Error('report.finalized');
-
-            return DB::table('incomes')
-                ->where('id', $id)
-                ->update([
-                    'source' => $data->source,
-                    'value' => $data->value
-                ]);
-        } catch (\Throwable $th) {
-            $this->writeLog('IncomeService::storeIncome', $th);
-            return false;
-        }
-    }
-
     public function getIncomeByID(string $id): object | null
     {
         try {
@@ -112,6 +90,46 @@ class IncomeService extends Service
         } catch (\Throwable $th) {
             $this->writeLog('IncomeService::getIncomeByID', $th);
             return null;
+        }
+    }
+
+    private function hasFinalized(string $id): bool
+    {
+        return DB::table('incomes')
+            ->where('id', $id)
+            ->whereNotNull('finalized_at')
+            ->exists();
+    }
+
+    public function updateIncome(object $data, string $id): bool
+    {
+        try {
+            if ($this->hasFinalized($id))
+                throw new Error('report.finalized');
+
+            return DB::table('incomes')
+                ->where('id', $id)
+                ->update([
+                    'source' => $data->source,
+                    'value' => $data->value
+                ]);
+        } catch (\Throwable $th) {
+            $this->writeLog('IncomeService::updateIncome', $th);
+            return false;
+        }
+    }
+
+    public function deleteByID(string $id): bool
+    {
+        try {
+            if ($this->hasFinalized($id))
+                throw new Error('report.finalized');
+
+            return DB::table('incomes')->where('id', $id)
+                ->delete();
+        } catch (\Throwable $th) {
+            $this->writeLog('IncomeService::deleteByID', $th);
+            return false;
         }
     }
 }

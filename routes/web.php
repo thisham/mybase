@@ -41,6 +41,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/financial/incomes', [IncomeController::class, 'render'])
         ->name('financial.incomes');
+    Route::get('/financial/incomes/{id}/delete', [IncomeController::class, 'destroy'])
+        ->name('financial.delete-income');
 
     Route::get('/financial/incomes/create', [CreateIncomeController::class, 'render'])
         ->name('financial.create-income');
