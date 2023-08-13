@@ -48,12 +48,12 @@
                             <td>{{ $record->finalized_at ? __('display.status.finalized') : __('display.status.floating') }}
                             </td>
                             <td>
-                                {{-- <div class="flex">
-                                    <a href="{{ route('financial.update-income', ['id' => $record->id]) }}"
+                                <div class="flex">
+                                    <a href="{{ route('financial.update-budget', ['id' => $record->id]) }}"
                                         class="clickable ghost w-fit">{{ __('display.action.edit') }}</a>
-                                    <a href="{{ route('financial.delete-income', ['id' => $record->id]) }}"
-                                        class="clickable ghost w-fit">{{ __('display.action.remove') }}</a>
-                                </div> --}}
+                                    {{-- <a href="{{ route('financial.delete-budget', ['id' => $record->id]) }}"
+                                        class="clickable ghost w-fit">{{ __('display.action.remove') }}</a> --}}
+                                </div>
                             </td>
                         </tr>
                     @empty
