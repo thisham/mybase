@@ -49,6 +49,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/financial/incomes/{id}/update', [UpdateIncomeController::class, 'render'])
         ->name('financial.update-income');
+    Route::post('/financial/incomes/{id}/update', [UpdateIncomeController::class, 'handle'])
+        ->name('financial.update-income');
 
     Route::get('/sign-out', function () {
         Auth::logout();

@@ -11,7 +11,7 @@
         </div>
 
         <div class="card" x-data="state">
-            <form action="{{ route('financial.create-income') }}" method="post">
+            <form action="{{ $action }}" method="post">
                 @csrf
 
                 <div class="field-group">

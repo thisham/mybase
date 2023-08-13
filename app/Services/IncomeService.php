@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Error;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -26,22 +27,24 @@ class IncomeService extends Service
         try {
             $regulation = $this->getRegulation();
 
-            return DB::table('incomes')->select([
-                'id', 'source', 'value', 'reduction', 'rates',
-                'finalized_at'
-            ])->get()->map(function ($data) use ($regulation) {
-                $reduction = ($data->finalized_at) ? $data->reduction :
-                    ceil(($regulation / 100 * $data->value) / 10) * 10;
+            return DB::table('incomes')
+                ->where('user_id', Auth::user()->id)
+                ->select([
+                    'id', 'source', 'value', 'reduction', 'rates',
+                    'finalized_at'
+                ])->get()->map(function ($data) use ($regulation) {
+                    $reduction = ($data->finalized_at) ? $data->reduction :
+                        ceil(($regulation / 100 * $data->value) / 10) * 10;
 
-                return (object) [
-                    'id' => $data->id,
-                    'source' => $data->source,
-                    'value' => $data->value,
-                    'reduction' => $reduction,
-                    'rates' => $data->rates ?? $regulation,
-                    'finalized_at' => $data->finalized_at
-                ];
-            });
+                    return (object) [
+                        'id' => $data->id,
+                        'source' => $data->source,
+                        'value' => $data->value,
+                        'reduction' => $reduction,
+                        'rates' => $data->rates ?? $regulation,
+                        'finalized_at' => $data->finalized_at
+                    ];
+                });
         } catch (\Throwable $th) {
             $this->writeLog('IncomeService::getIncomeList', $th);
             return [];
@@ -57,6 +60,28 @@ class IncomeService extends Service
                 'source' => $data->source,
                 'value' => $data->value
             ]);
+        } catch (\Throwable $th) {
+            $this->writeLog('IncomeService::storeIncome', $th);
+            return false;
+        }
+    }
+
+    public function updateIncome(object $data, string $id): bool
+    {
+        try {
+            if (DB::table('incomes')
+                ->where('id', $id)
+                ->whereNotNull('finalized_at')
+                ->exists()
+            )
+                throw new Error('report.finalized');
+
+            return DB::table('incomes')
+                ->where('id', $id)
+                ->update([
+                    'source' => $data->source,
+                    'value' => $data->value
+                ]);
         } catch (\Throwable $th) {
             $this->writeLog('IncomeService::storeIncome', $th);
             return false;

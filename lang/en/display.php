@@ -37,4 +37,8 @@ return [
 
     'message.create-success' => 'Success creating record!',
     'message.create-failed' => 'Failed creating record!',
+    'message.update-success' => 'Success updating record!',
+    'message.update-failed' => 'Failed updating record!',
+    'message.delete-success' => 'Success deleting record!',
+    'message.delete-failed' => 'Failed deleting record!',
 ];
