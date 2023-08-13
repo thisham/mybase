@@ -45,20 +45,22 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'render'])
         ->name('main.dashboard');
 
-    Route::get('/financial/incomes', [IncomeController::class, 'render'])
-        ->name('financial.incomes');
-    Route::get('/financial/incomes/{id}/delete', [IncomeController::class, 'destroy'])
-        ->name('financial.delete-income');
+    Route::prefix('/financial/incomes')->group(function () {
+        Route::get('/', [IncomeController::class, 'render'])
+            ->name('financial.incomes');
+        Route::get('/{id}/delete', [IncomeController::class, 'destroy'])
+            ->name('financial.delete-income');
 
-    Route::get('/financial/incomes/create', [IncomeCreatorController::class, 'render'])
-        ->name('financial.create-income');
-    Route::post('/financial/incomes/create', [IncomeCreatorController::class, 'handle'])
-        ->name('financial.create-income');
+        Route::get('/create', [IncomeCreatorController::class, 'render'])
+            ->name('financial.create-income');
+        Route::post('/create', [IncomeCreatorController::class, 'handle'])
+            ->name('financial.create-income');
 
-    Route::get('/financial/incomes/{id}/update', [IncomeUpdaterController::class, 'render'])
-        ->name('financial.update-income');
-    Route::post('/financial/incomes/{id}/update', [IncomeUpdaterController::class, 'handle'])
-        ->name('financial.update-income');
+        Route::get('/{id}/update', [IncomeUpdaterController::class, 'render'])
+            ->name('financial.update-income');
+        Route::post('/{id}/update', [IncomeUpdaterController::class, 'handle'])
+            ->name('financial.update-income');
+    });
 
     Route::prefix('/financial/budgets')->group(function () {
         Route::get('/', [BudgetController::class, 'render'])
@@ -77,20 +79,22 @@ Route::middleware(['auth'])->group(function () {
             ->name('financial.update-budget');
     });
 
-    Route::get('/financial/loans', [LoanController::class, 'render'])
-        ->name('financial.loans');
-    Route::get('/financial/loans/{id}/delete', [LoanController::class, 'destroy'])
-        ->name('financial.delete-loan');
+    Route::prefix('/financial/loans')->group(function () {
+        Route::get('/', [LoanController::class, 'render'])
+            ->name('financial.loans');
+        Route::get('/{id}/delete', [LoanController::class, 'destroy'])
+            ->name('financial.delete-loan');
 
-    Route::get('/financial/loans/create', [LoanCreatorController::class, 'render'])
-        ->name('financial.create-loan');
-    Route::post('/financial/loans/create', [LoanCreatorController::class, 'handle'])
-        ->name('financial.create-loan');
+        Route::get('/create', [LoanCreatorController::class, 'render'])
+            ->name('financial.create-loan');
+        Route::post('/create', [LoanCreatorController::class, 'handle'])
+            ->name('financial.create-loan');
 
-    Route::get('/financial/loans/{id}/update', [LoanUpdaterController::class, 'render'])
-        ->name('financial.update-loan');
-    Route::post('/financial/loans/{id}/update', [LoanUpdaterController::class, 'handle'])
-        ->name('financial.update-loan');
+        Route::get('/{id}/update', [LoanUpdaterController::class, 'render'])
+            ->name('financial.update-loan');
+        Route::post('/{id}/update', [LoanUpdaterController::class, 'handle'])
+            ->name('financial.update-loan');
+    });
 
     Route::get('/sign-out', function () {
         Auth::logout();
