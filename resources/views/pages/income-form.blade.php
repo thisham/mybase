@@ -1,4 +1,6 @@
-<x-layouts.user title="{{ $title }}">
+@extends('components.layouts.user', ['title' => $title])
+
+@section('content')
     <x-layouts.user-transaction>
         <div class="flex flex-col gap-2 mb-4">
             <div class="flex justify-between items-center">
@@ -36,8 +38,7 @@
                     <div class="field-group w-48">
                         <label for="rates">{{ __('display.field-column.rates') }}</label>
                         <div class="relative w-full">
-                            <input type="number" name="rates" id="rates" class="!w-full" x-model="rates"
-                                disabled />
+                            <input type="number" name="rates" id="rates" class="!w-full" x-model="rates" disabled />
                             <span class="w-8 h-full absolute top-0 right-0 flex items-center justify-center">%</span>
                         </div>
                     </div>
@@ -56,7 +57,9 @@
             </form>
         </div>
     </x-layouts.user-transaction>
+@endsection
 
+@pushOnce('scripts')
     <script type="text/javascript" defer>
         const state = {
             rates: {{ $regulation }},
@@ -76,4 +79,4 @@
             }
         }
     </script>
-</x-layouts.user>
+@endPushOnce

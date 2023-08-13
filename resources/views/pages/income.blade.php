@@ -1,4 +1,6 @@
-<x-layouts.user title="Income Reports">
+@extends('components.layouts.user', ['title' => __('display.financial.income')])
+
+@section('content')
     <x-layouts.user-transaction>
         <div class="flex flex-col gap-2 mb-4">
             <div class="flex justify-between items-center">
@@ -57,4 +59,4 @@
             </table>
         </div>
     </x-layouts.user-transaction>
-</x-layouts.user>
+@endsection

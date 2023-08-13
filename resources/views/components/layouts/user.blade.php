@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ $attributes['title'] }}</title>
+    <title>{{ $title }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=K2D&display=swap" rel="stylesheet">
@@ -33,7 +33,7 @@
     </div>
 
     <div class="px-12 mt-20 mb-auto">
-        {{ $slot }}
+        @yield('content')
     </div>
 
     <footer class="w-full h-12 flex items-center justify-center">

@@ -1,10 +1,12 @@
-<x-layouts.user title="{{ __('display.navigation.dashboard') }}">
+@extends('components.layouts.user', ['title' => __('display.navigation.dashboard')])
+
+@section('content')
     <div class="grid grid-cols-4 gap-4">
         <div class="col-span-3">
             <div>
                 <div class="card flex gap-8">
-                    <img src="{{ asset('/storage/default.jpg') }}"
-                        class="w-28 h-28 aspect-square object-cover object-center" alt="Profile Picture" />
+                    <img src="{{ asset('/storage/default.jpg') }}" class="w-28 h-28 aspect-square object-cover object-center"
+                        alt="Profile Picture" />
                     <div class="w-full flex justify-between items-center">
                         <div class="h-full py-2 flex flex-col justify-between">
                             <span class="text-item-700 text-lg">{{ __('display.dashboard.greetings') }}</span>
@@ -14,8 +16,7 @@
                             </div>
                         </div>
 
-                        <button
-                            class="clickable primary w-fit text-sm">{{ __('display.dashboard.edit-profile') }}</button>
+                        <button class="clickable primary w-fit text-sm">{{ __('display.dashboard.edit-profile') }}</button>
                     </div>
                 </div>
 
@@ -70,4 +71,4 @@
             </div>
         </div>
     </div>
-</x-layouts.user>
+@endsection
