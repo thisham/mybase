@@ -7,11 +7,15 @@
         <a href="#" class="clickable ghost @if (Route::is('main.dashboard')) active @endif">
             {{ __('display.financial.loans') }}
         </a>
-        <a href="#" class="clickable ghost @if (Route::is('main.dashboard')) active @endif">
-            {{ __('display.financial.billings') }}
+        <a href="{{ route('financial.budgets') }}"
+            class="clickable ghost @if (Route::is('financial.budgets') || Route::is('financial.create-budget') || Route::is('financial.update-budget')) active @endif">
+            {{ __('display.financial.budgets') }}
         </a>
         <a href="#" class="clickable ghost @if (Route::is('main.dashboard')) active @endif">
-            {{ __('display.financial.payment') }}
+            {{ __('display.financial.invoices') }}
+        </a>
+        <a href="#" class="clickable ghost @if (Route::is('main.dashboard')) active @endif">
+            {{ __('display.financial.payments') }}
         </a>
     </div>
 

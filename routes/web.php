@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\BudgetController;
+use App\Http\Controllers\BudgetCreatorController;
+use App\Http\Controllers\BudgetUpdaterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\IncomeCreatorController;
@@ -53,6 +56,21 @@ Route::middleware(['auth'])->group(function () {
         ->name('financial.update-income');
     Route::post('/financial/incomes/{id}/update', [IncomeUpdaterController::class, 'handle'])
         ->name('financial.update-income');
+
+    Route::prefix('/financial/budgets')->group(function () {
+        Route::get('/', [BudgetController::class, 'render'])
+            ->name('financial.budgets');
+
+        Route::get('/create', [BudgetCreatorController::class, 'render'])
+            ->name('financial.create-budget');
+        Route::post('/create', [BudgetCreatorController::class, 'handle'])
+            ->name('financial.create-budget');
+
+        Route::get('/{id}/update', [BudgetUpdaterController::class, 'render'])
+            ->name('financial.update-budget');
+        Route::post('/{id}/update', [BudgetUpdaterController::class, 'handle'])
+            ->name('financial.update-budget');
+    });
 
     Route::get('/sign-out', function () {
         Auth::logout();
