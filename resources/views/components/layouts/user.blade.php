@@ -19,7 +19,11 @@
             <a class="clickable @if (Route::is('main.dashboard')) active @endif" href="{{ route('main.dashboard') }}">
                 {{ __('display.navigation.dashboard') }}
             </a>
-            <a class="clickable @if (Route::is('auth.sign-in')) active @endif" href="{{ route('auth.sign-in') }}">
+            <a class="clickable @if (Route::is('financial.incomes') ||
+                    Route::is('financial.loans') ||
+                    Route::is('financial.billings') ||
+                    Route::is('financial.payment')) active @endif"
+                href="{{ route('financial.incomes') }}">
                 {{ __('display.navigation.financial') }}
             </a>
             <a class="clickable @if (Route::is('auth.sign-out')) active @endif" href="{{ route('auth.sign-out') }}">
@@ -35,6 +39,8 @@
     <footer class="w-full h-12 flex items-center justify-center">
         &copy; 2023 Divisi Anggaran Keuangan
     </footer>
+
+    @stack('scripts')
 </body>
 
 </html>

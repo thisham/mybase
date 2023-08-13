@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\CreateIncomeController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\SignInController;
 use App\Http\Controllers\SignUpController;
 use Illuminate\Support\Facades\Auth;
@@ -35,6 +37,9 @@ Route::post('sign-up', [SignUpController::class, 'handle'])
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'render'])
         ->name('main.dashboard');
+
+    Route::get('/financial/incomes', [IncomeController::class, 'render'])
+        ->name('financial.incomes');
 
     Route::get('/sign-out', function () {
         Auth::logout();
