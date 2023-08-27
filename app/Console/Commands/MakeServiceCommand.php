@@ -67,7 +67,7 @@ class MakeServiceCommand extends Command
 
     public function getSourceFilePath()
     {
-        return base_path('App\\Services') . '\\' . $this->getSingularClassName($this->argument('name')) . 'Service.php';
+        return base_path('App\\Services') . '\\' . $this->getSingularClassName($this->argument('name')) . '.php';
     }
 
     protected function makeDirectory($path)

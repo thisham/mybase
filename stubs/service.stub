@@ -2,7 +2,7 @@
 
 namespace $NAMESPACE$;
 
-class $CLASS_NAME$Service extends Service
+class $CLASS_NAME$ extends Service
 {
     //
 }
